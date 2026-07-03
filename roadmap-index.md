@@ -18,13 +18,19 @@ Out of scope: frontend frameworks, TS deep-dive (→ separate TS roadmap), perf/
 ## TypeScript — Phase 1
 Assumes JS Phase 1 complete.
 Stages: 1 Compiler & mental model (superset of JS, type erasure, tsc, tsconfig, strict, inference) · 2 Core type system (primitives, arrays/tuples, unions/literals, any/unknown/never, satisfies) · 3 Shaping data (function typing, interfaces, interface vs type, structural typing, classes/access modifiers) · 4 Generics (generic functions/interfaces, inference, constraints, Promise<T>/Chainable<T>) · 5 Narrowing & utility types (type guards, discriminated unions, Partial/Pick/Omit/Record/Awaited, strictNullChecks) · 6 Real tools (tsconfig depth, @types/.d.ts, **typing Cypress custom commands via declare global**, typing Express, tsc --noEmit in CI) · 7 Capstone (convert app to TS, shared types module, typed layered suite, CI type-check gate)
-Out of scope: conditional/mapped/template-literal types, TS+React, decorators, monorepo/project refs, compiler internals.
-⚠️ Cross-reference: Stage 6 covers TS+Cypress custom commands, which the Cypress roadmap lists as out-of-scope for itself — point back here instead of re-teaching it in a future Cypress phase.
+Out of scope: conditional/mapped/template-literal types, TS+React, TS+React Native, decorators, monorepo/project refs, compiler internals.
+⚠️ Cross-reference: Stage 6 covers TS+Cypress custom commands, which the Cypress roadmap lists as out-of-scope for itself — point back here instead of re-teaching it in a future Cypress phase. TS+React Native is also the designated home for typing the React Native app (out of scope in the RN roadmap → point here).
 
 ## React (core concepts) — Phase 1
 Prep track for React Native (Visual Life Archive app). Assumes JS Stages 1–3 + ES6.
 Stages: 1 What React is & JSX (declarative UI, components, JSX, Vite scratch project) · 2 Components & props (props/one-way flow, composition, list rendering + key, conditional rendering) · 3 State & interactivity (useState, render loop, events, controlled inputs, state-as-snapshot) · 4 Side effects & data (useEffect + deps, fetching, loading/error/success states, cleanup) · 5 Thinking in React (one-way data flow, lifting state up, component-tree decomposition, useRef/useContext intro)
-Out of scope: React Native itself (own roadmap), routing/Next.js/Server Components, state-mgmt libraries, perf hooks, TS+React, custom hooks/useReducer.
+Out of scope: React Native itself (**now covered — see React Native + Expo Phase 1**), routing/Next.js/Server Components, state-mgmt libraries, perf hooks, TS+React, custom hooks/useReducer.
+
+## React Native + Expo — Phase 1 (Visual Life Archive app)
+Project-based; the "own roadmap" React (core concepts) points to. Hard prereq: React (core concepts) Phase 1. Written in JavaScript (TS deferred → TS roadmap). Goal: full app with auth + photo storage + data on Supabase. Tooling reflects SDK 55/56 era (New Architecture always-on, Expo Router default nav).
+Stages: 1 RN + Expo mental model (RN renders real native components = "React for mobile", Expo tooling/Expo Go, create-expo-app, View/Text/Image/ScrollView vs web, New Arch is automatic) · 2 Core components/styling/Flexbox (StyleSheet, camelCase/dp units, Flexbox with flexDirection:column default, Pressable/TouchableOpacity/Button/TextInput, safe areas) · 3 Lists & navigation (FlatList numColumns grid, ScrollView vs FlatList, FlashList intro, Expo Router file-based routing: app/ dir, _layout, Stack/Tabs, Link/router.push, dynamic [id] routes) · 4 Native capabilities (Expo module + permissions model, expo-image-picker camera/library + asset URI, expo-image, AsyncStorage vs expo-secure-store intro) · 5 Supabase backend [deep] (BaaS: Postgres+REST+Auth+Storage+RLS, supabase-js in Expo + session storage adapter + EXPO_PUBLIC_ env, email/password auth + session persistence, DB queries via supabase.from, RLS scoped to auth.uid() + why anon key is safe, Storage buckets + upload from URI) · 6 Assembling the app (auth context + Expo Router protected routes, capture→upload→save-metadata→render-grid loop, loading/error/empty states, useEffect fetching, app.json/icons/splash)
+Out of scope: **TS+React Native (→ TypeScript Phase 1)**, EAS Build/store shipping (own mini-roadmap), testing the RN app (Detox/Maestro/RNTL — strong QAOps Phase 2, ties to JS/Cypress tracks), animations/gestures (Reanimated/Gesture Handler), push notifications/deep linking/OAuth-social login, Realtime/offline sync, state-mgmt libs (Redux/Zustand)/TanStack Query, bare/native workflow + custom native modules + web target, React Navigation standalone (using Expo Router instead).
+⚠️ Cross-reference: typing this app is owned by TypeScript Phase 1 (RN is TS-native; retrofits cleanly). RN-app testing is a candidate Phase 2 that connects to the JavaScript (Playwright) and Cypress roadmaps.
 
 ## Cypress — Phase 1
 Prereqs: JS async/DOM/HTTP/Node/testing-concepts fundamentals.
@@ -33,4 +39,4 @@ Out of scope: TS+Cypress (**now partly covered — see TypeScript Stage 6**), vi
 
 ---
 
-**Shared prerequisite recall (expected, not wasted duplication):** async/promises, npm/Node basics, DOM/selectors, and CI fundamentals appear as brief prerequisite context across Git, JS, TS, Cypress, React, and GitHub. That's intentional light overlap for grounding, not a repeated stage.
+**Shared prerequisite recall (expected, not wasted duplication):** async/promises, npm/Node basics, DOM/selectors, and CI fundamentals appear as brief prerequisite context across Git, JS, TS, Cypress, React, React Native, and GitHub. That's intentional light overlap for grounding, not a repeated stage.
