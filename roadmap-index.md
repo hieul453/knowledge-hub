@@ -25,29 +25,55 @@ Out of scope: conditional/mapped/template-literal types, TS+React, decorators, m
 Prep track for React Native (Visual Life Archive app). Assumes JS Stages 1–3 + ES6.
 Stages: 1 What React is & JSX (declarative UI, components, JSX, Vite scratch project) · 2 Components & props (props/one-way flow, composition, list rendering + key, conditional rendering) · 3 State & interactivity (useState, render loop, events, controlled inputs, state-as-snapshot) · 4 Side effects & data (useEffect + deps, fetching, loading/error/success states, cleanup) · 5 Thinking in React (one-way data flow, lifting state up, component-tree decomposition, useRef/useContext intro)
 Out of scope: React Native itself (own roadmap), routing/Next.js/Server Components, state-mgmt libraries, perf hooks, TS+React, custom hooks/useReducer.
-Note: styling/layout not covered here — see the Flexbox roadmap for the layout layer the React/RN frontend relies on.
-
-## Flexbox (Layout & Styling) — Phase 1
-Companion to the React / React Native frontend (Visual Life Archive app); taught universally (web CSS + React Native). Can be started in a browser before React — only Stage 4 leans on React. Prereqs: basic HTML/CSS (for the sandbox), React (for Stage 4 only).
-Stages: 1 Mental model (flex container vs items, main vs cross axis, flex-direction, RN column-default preview) · 2 Aligning/distributing (justify-content, align-items, align-self, perfect centering) · 3 Sizing/flexibility (flex-grow/shrink/basis, flex shorthand + flex:1, flex-wrap, gap, align-content) · 4 Real layouts & React Native differences (header/content/footer column, wrapping card gallery, RN camelCase style objects/unitless dimensions/flexbox-only layout, aspect-ratio)
-Out of scope: CSS Grid (separate topic; absent in React Native), rest of CSS (box model/positioning/animations/media queries), NativeWind/Tailwind/styled-components, responsive web beyond wrapping, RN styling beyond layout (theming/Dimensions/safe areas).
 
 ## Cypress — Phase 1
 Prereqs: JS async/DOM/HTTP/Node/testing-concepts fundamentals.
 Stages: 1 Architecture & first test (in-browser model vs Selenium, install, open vs run mode, describe/it/visit/get) · 2 Core commands (get/contains, data-cy selectors, interactions, assertions/Chai) · 3 Async model & retry-ability [deep] (command queue, not-Promises, retry rules, aliases vs variables, .then()) · 4 Network & test data (cy.intercept spy/stub, fixtures, cy.request, cy.session) · 5 Structuring a real suite (custom commands, test isolation, Page Object vs App Actions, component testing intro) · 6 QAOps: CI/parallelization/limits (headless run, GitHub Action, parallelization, Cypress's limits vs Playwright)
 Out of scope: TS+Cypress (**now partly covered — see TypeScript Stage 6**), visual regression/a11y, BDD/Cucumber, plugin authoring, Playwright itself.
+⚠️ Cross-reference: the "HTTP basics" prerequisite above is listed but never actually taught here — now covered by **REST API / HTTP Phase 1, Stage 1**. Point back there instead of teaching it in a future Cypress phase.
 
-## Cross-Cutting Concepts: Authentication & Secrets — Phase 1
-Group 4 cross-cutting concepts for the Visual Life Archive app; conceptual first, then applied to Supabase Auth on Expo. Prereqs: JS async/HTTP (Stage 3) + API basics; React + Git .gitignore for the later stages.
-Stages: 1 Auth fundamentals (authentication vs authorization, the universal login flow, why stateless HTTP needs it) · 2 Sessions vs tokens (stateful sessions + session-ID cookie vs stateless signed tokens, JWT header/payload/signature, access vs refresh) · 3 Auth in the app — Supabase Auth on Expo (sign up/in/out, session persistence, RLS concept, secure device storage / SecureStore) · 4 Environment variables & secrets (.env, EXPO_PUBLIC_ convention, client-vs-server secret distinction — anon key safe via RLS, service_role never client-side, .gitignore)
-Out of scope: building own auth server / password hashing, RLS policy-writing depth (→ future Supabase roadmap), OAuth/social-login deep flow + deep linking, cryptography internals, CI/deployment secrets mechanics (→ GitHub Stage 5), secret managers/rotation, web cookie-security deep-dive.
-⚠️ Cross-reference: Stage 4 light-recalls CI/deployment secrets and points back to GitHub Phase 1 Stage 5 (secrets/GITHUB_TOKEN) rather than re-teaching it.
+## SQL & Relational Databases — Phase 1
+Three drivers weighted evenly: app backend (Supabase/Postgres), QAOps (test-data setup/teardown + DB state verification), general fluency. Teaches the relational engine itself; Supabase-the-platform is a separate roadmap.
+Stages: 1 Relational model & setup · 2 Querying a single table (SELECT, filtering, sorting) · 3 Designing tables (data types, constraints, schema design) · 4 Relationships & JOINs · 5 Aggregation, grouping & subqueries · 6 Writing data & transactions (integrity) · 7 PostgreSQL in your real stack (Supabase, indexes, test data)
+Out of scope: RLS in depth (**now covered — see Supabase Phase 1, Stage 3**), query performance tuning (EXPLAIN ANALYZE, index types), window functions/advanced analytics, stored procedures/functions/triggers (PL/pgSQL), migrations tooling deep-dive, ORMs/query builders, database administration at scale, NoSQL comparison depth.
 
-## Expo EAS Build & App Store Submission — Phase 1
-Deployment stage for the Visual Life Archive app; assumes a working Expo/RN app. Real costs appear here (Apple Developer $99/year recurring, Google Play $25 one-time). Prereqs: working Expo app (RN roadmap), env-vars concept (Auth & Secrets Stage 4), Git.
-Stages: 1 EAS mental model (Build/Submit/Update, cloud macOS = no Mac needed, eas.json build profiles dev/preview/production, AAB vs APK, internal distribution) · 2 App identity/credentials/signing (iOS cert+provisioning profile / Android keystore, EAS-managed credentials, bundleIdentifier/package-name permanence, version vs build number, dev accounts) · 3 Running EAS Build (EAS CLI, eas build:configure, eas build --profile, device install via internal dist/TestFlight/Play internal, build-time env field) · 4 Store submission & review (EAS Submit/--auto-submit/submit profiles, iOS→App Store Connect→TestFlight→App Review, Android→Play Console manual-first-upload→tracks→Data safety form, gotchas: 12-testers/14-day rule + privacy policy + review; EAS Update OTA should-know)
-Out of scope: building the app / RN feature code (→ RN roadmap), web deploy/Vercel, deep CI/CD authoring (→ GitHub Stage 5), manual credentials/Fastlane, custom native modules/prebuild, ASO/marketing/monetization/IAP, EU DMA/alt stores/enterprise MDM.
-⚠️ Cross-reference: build-time secrets light-recall points to Auth & Secrets Stage 4 + GitHub Stage 5; CI-triggered build/submit points to GitHub Stage 5.
+## Supabase — Phase 1
+Full-platform roadmap (schema+RLS, auth, storage, Realtime, Edge Functions, CLI/migrations/local dev) — three drivers weighted evenly: app backend, general BaaS fluency, QAOps.
+Stages: 1 Platform mental model & setup · 2 Database layer — tables, relationships & auto-generated API · 3 Row Level Security & the auth-to-data security model · 4 Authentication in depth · 5 Storage — files, buckets & access policies · 6 Realtime & Edge Functions · 7 Local dev, CLI, migrations & environments · 8 QAOps — testing against Supabase, seeding & verifying state
+Out of scope: deep Postgres/SQL engine (owned by SQL Phase 1), advanced RLS at scale (multi-tenant RBAC, perf tuning), self-hosting Supabase, pgvector/AI embeddings, advanced Postgres extensions (PostGIS, pg_cron, pg_net), production ops at scale, framework-specific SSR auth deep-dives, Management API/CI-CD for the platform itself.
+⚠️ Cross-reference: fulfills the "RLS in depth" deferral that SQL Phase 1 explicitly pointed here — supersedes that out-of-scope note (Stage 3). Also supersedes React Native + Expo Phase 1's Supabase intro on depth: RN Stages 5–6 apply Supabase from the mobile client only; this roadmap is the deeper platform source and covers Realtime & Edge Functions, which the RN roadmap lists as out of scope.
+
+## Auth & Secrets — Phase 1
+Cross-cutting "Group 4" concept roadmap, learned alongside backend/Supabase work rather than in isolation. Not implementing auth from scratch — Supabase handles that; this builds the mental model to use it correctly and safely.
+Stages: 1 Authentication fundamentals — the mental model · 2 Sessions vs tokens (and JWTs) · 3 Auth in your app — Supabase Auth on Expo · 4 Environment variables & secrets
+Out of scope: building your own auth server/password hashing internals, writing RLS policies in depth/RBAC (→ Supabase Phase 1), OAuth/social-login deep flow + deep-linking, cryptography internals, CI/deployment secrets mechanics (→ GitHub Phase 1, Stage 5), secret-management platforms/key rotation, web cookie-security deep-dive.
+
+## REST API / HTTP — Phase 1 (Consuming, Designing & Testing)
+Conceptual spine (HTTP + REST theory + API-consumer concerns + tooling) that JS, React, Cypress, and Supabase roadmaps assumed but never taught directly. Concept-first, with tool mechanics referenced out to the roadmap that owns them.
+Stages: 1 HTTP — the protocol (verbs/safe-idempotent-cacheable, status code families, headers, URLs/query params) · 2 REST — the architectural style (resources/representations, CRUD↔verb mapping, statelessness, Richardson Maturity Model, REST vs GraphQL/RPC) · 3 Consuming APIs in practice (auth schemes — API keys/Bearer/JWT/OAuth, CORS, pagination/filtering, error handling & resilience, exploration tooling/OpenAPI) · 4 Designing a REST API (resource modeling, URL/verb/status conventions, request/response body design, consistent errors, versioning) · 5 Testing REST APIs (three assertion layers, positive/negative/auth/boundary cases, test data & isolation, contract testing concept)
+Out of scope: fetch/async/await mechanics (owned by JS Phase 1, Stage 3), data-fetching UI states (owned by React Phase 1, Stage 4), implementing a server + Supabase/PostgREST specifics + RLS (owned by JS Phase 1 Stage 8 / Supabase Phase 1), tool-specific test syntax (JS Phase 1 Stage 7 / Cypress Phase 1 Stage 4), GraphQL in depth, real-time/streaming (WebSockets/SSE/Supabase Realtime), API gateways/rate-limit implementation/CDNs/production ops, performance/load testing, gRPC/Protocol Buffers.
+⚠️ Cross-reference: becomes the canonical owner of HTTP & REST fundamentals, which Cypress Phase 1 lists as a prerequisite but never actually teaches — supersedes that prerequisite bullet (see Cypress entry above).
+
+## Flexbox — Phase 1
+Universal layout roadmap — designed to serve both React Native (its actual layout system) and web CSS, with Stage 4 isolating RN-specific differences. Avoids re-teaching layout inside the React Native roadmap.
+Stages: 1 Mental model — container, items & the two axes · 2 Distributing & aligning (justify-content, align-items, align-self) · 3 Sizing & flexibility (grow, shrink, basis, wrapping) · 4 Real layouts & React Native differences
+Out of scope: CSS Grid (doesn't exist in RN — separate web-only roadmap later), rest of CSS (box model depth, positioning, transitions/animations, media/container queries), NativeWind/Tailwind/styled-components abstractions, responsive web design beyond wrapping, RN styling beyond layout (theming, platform-specific styles, Dimensions, safe areas).
+
+## React Native + Expo — Phase 1
+Capstone: builds the Visual Life Archive app (auth + photo storage + data, all on Supabase). Assumes React core concepts (Phase 1) + Flexbox Stage 4 as prerequisite context; JavaScript-first per established pattern — not RN mastery, the exact stack this app needs.
+Stages: 1 What RN + Expo are — mental model & first screen · 2 Building UIs — core components, styling & Flexbox · 3 Lists & navigation (FlatList + Expo Router) · 4 Native capabilities — permissions, camera & photos · 5 The backend — Supabase auth, database & storage · 6 Assembling the app — auth-gated navigation & the full loop
+Out of scope: TypeScript with RN (→ TypeScript Phase 1, after app + concepts are solid), shipping to app stores (→ EAS Build & Submit Phase 1), testing the RN app (Detox/Maestro/RNTL — candidate QAOps Phase 2, connects to JS/Cypress tracks), animations & gestures (Reanimated/Gesture Handler), push notifications/deep linking/social-OAuth login, Realtime & offline sync (**deeper coverage — see Supabase Phase 1, Stage 6**), state-management libraries (Redux/Zustand/TanStack Query), bare/native workflow/custom native modules/web target, React Navigation (using Expo Router instead).
+⚠️ Cross-reference: its Supabase intro (Stages 5–6) is superseded on depth by Supabase Phase 1, which is the canonical source for Realtime & Edge Functions (listed out of scope here) and full Auth/Storage/RLS treatment.
+
+## EAS Build & Submit — Phase 1
+Deployment stage — takes the finished RN app from source to installable build and app-store submission via Expo's cloud build/submit (EAS); no Mac required.
+Stages: 1 EAS & the build/submit mental model · 2 App identity, credentials & signing · 3 Running EAS Build · 4 Store submission & review
+Out of scope: building the app/RN feature code (→ React Native + Expo Phase 1), web deployment (→ Vercel Phase 1), deep CI/CD pipeline authoring (→ GitHub Phase 1, Stage 5), manual native credential management/Fastlane, custom native modules/bare-workflow prebuild, App Store Optimization/marketing/monetization/in-app purchases, EU DMA/alternative app stores/enterprise MDM distribution.
+
+## Vercel — Phase 1
+Web-deployment counterpart to EAS (which ships the mobile apps) — deploys the Expo project's web build to a live public URL.
+Stages: 1 What Vercel is & the deployment mental model · 2 Deploying the app's web version · 3 Environment variables, domains & configuration · 4 The deployment workflow & operations
+Out of scope: building the web app itself (output comes from React Native + Expo Phase 1), Vercel Functions/Edge Functions/API routes (backend is Supabase, not Vercel), Next.js-specific features (SSR/ISR/App Router — app isn't Next.js), mobile app deployment (→ EAS Build & Submit Phase 1), CI test pipelines (→ GitHub Phase 1, Stage 5), DNS deep-dive/advanced CDN tuning/monorepo config/Enterprise features.
 
 ---
 
